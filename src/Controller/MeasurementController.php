@@ -25,7 +25,7 @@ final class MeasurementController extends AbstractController
     }
 
     #[Route('/new', name: 'app_measurement_new', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_MEASUREMENT_DELETE')]
+    #[IsGranted('ROLE_MEASUREMENT_NEW')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $measurement = new Measurement();
@@ -78,7 +78,7 @@ final class MeasurementController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_measurement_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_MEASUREMENT_EDIT')]
+    #[IsGranted('ROLE_MEASUREMENT_DELETE')]
     public function delete(Request $request, Measurement $measurement, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$measurement->getId(), $request->getPayload()->getString('_token'))) {
