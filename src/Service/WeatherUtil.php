@@ -11,13 +11,15 @@ use App\Repository\PlaceRepository;
 class WeatherUtil
 {
 
-    public function __construct(private PlaceRepository $placeRepository)
+
+
+    public function __construct(private PlaceRepository $placeRepository,  private MeasurementRepository $measurementRepository)
     {
     }
 
     public function getWeatherForPlace(Place $place): array
     {
-        return $place->getMeasurements()->toArray();
+        return $this->measurementRepository->findByPlace($place);
     }
     public function getWeatherForCountryAndCity(string $countryCode,string $city): array
     {
